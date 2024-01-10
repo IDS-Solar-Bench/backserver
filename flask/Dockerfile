@@ -1,4 +1,5 @@
-# syntax=docker/dockerfile:1.4
+# This Dockerfile and it corsponding docker-compose was created from the docker team at link https://github.com/docker/awesome-compose/tree/master/flask
+
 FROM --platform=$BUILDPLATFORM python:3.10-alpine AS builder
 
 WORKDIR /app

@@ -1,3 +1,5 @@
+# This docker compose file was created at https://github.com/sukesh-ak/setup-mosquitto-with-docker
+
 version: "3.7"
 services:
   # mqtt5 eclipse-mosquitto

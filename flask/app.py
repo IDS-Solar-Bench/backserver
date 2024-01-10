@@ -23,8 +23,6 @@ def fetch_message():
 		query = "SELECT time, message FROM brokerMessage;"
 		cursor.execute(query)
 
-		
-
 		# Fetch all rows from the result set
 		rows = cursor.fetchall()
 
