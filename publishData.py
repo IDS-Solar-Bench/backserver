@@ -16,5 +16,4 @@ client1.username_pw_set(user, password=password)    #set username and password
 client1.on_publish = on_publish                          #assign function to callback
 client1.connect(broker_address, port)                                 #establish connection
 
-ret= client1.publish("python/test","Message from Python! 1")
-ret= client1.publish("python/test","Message from Python! 2")
+ret= client1.publish("python/test","I love Vim2!")
