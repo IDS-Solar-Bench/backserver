@@ -1,0 +1,54 @@
+services:
+
+  broker:
+    image: eclipse-mosquitto
+    working_dir: /broker
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./broker/config:/mosquitto/config:rw
+      - ./broker/data:/mosquitto/data:rw
+      - ./broker/log:/mosquitto/log:rw
+    restart: always
+
+  funnel:
+    build: ./funnel
+    command: sh -c "sleep 10s ; python3 -u ./funnel.py"
+    depends_on:
+      - broker
+      - mysql
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: always
+  
+  mysql:
+    image: mysql:latest
+    working_dir: /mysql
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=idsBench
+    restart: always
+
+  flask: 
+    build:
+      context: flask 
+      target: builder
+    # flask requires SIGINT to stop gracefully
+    # (default stop signal from Compose is SIGTERM)
+    stop_signal: SIGINT
+    ports:
+      - '8000:8000'
+    restart: always
+    
+volumes:
+  config:
+  data:
+  log:
+  mysql-data:
+
+    
