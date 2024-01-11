@@ -2,7 +2,6 @@ import mysql.connector
 
 class mySqlConnector:
 
-
     def __init__(self, user: str, password: str, host: str, port: int, database: str):
 
         # Connect to the MySql database using the credentials passed in.

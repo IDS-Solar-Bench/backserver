@@ -1,5 +1,5 @@
 import paho.mqtt.client as mqttClient
-from mySqlConnector import mySqlConnector
+from Classes.mySqlConnector import mySqlConnector
 import time
 
 # This class hides logic of connecting to broker and adding messages into database.

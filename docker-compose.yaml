@@ -15,8 +15,6 @@ services:
   funnel:
     build: ./funnel
     command: sh -c "sleep 24s ; python3 -u ./funnel.py"
-    env_file:
-      - dev.env
     depends_on:
       - broker
       - mysql
@@ -29,8 +27,6 @@ services:
   
   mysql:
     image: mysql:latest
-    env_file:
-      - dev.env
     ports:
       - 3306:3306
     volumes:
