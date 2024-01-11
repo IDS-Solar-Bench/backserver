@@ -14,23 +14,29 @@ services:
 
   funnel:
     build: ./funnel
-    command: sh -c "sleep 10s ; python3 -u ./funnel.py"
+    command: sh -c "sleep 24s ; python3 -u ./funnel.py"
+    env_file:
+      - dev.env
     depends_on:
       - broker
       - mysql
     environment:
+      - MQTT_USER=${MQTT_USER}
+      - MQTT_PASSWORD=${MQTT_PASSWORD}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - PYTHONUNBUFFERED=1
     restart: always
   
   mysql:
     image: mysql:latest
-    working_dir: /mysql
+    env_file:
+      - dev.env
     ports:
       - 3306:3306
     volumes:
       - mysql-data:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=idsBench
     restart: always
 
@@ -38,8 +44,6 @@ services:
     build:
       context: flask 
       target: builder
-    # flask requires SIGINT to stop gracefully
-    # (default stop signal from Compose is SIGTERM)
     stop_signal: SIGINT
     ports:
       - '8000:8000'
