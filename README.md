@@ -21,8 +21,8 @@ The funnel is a constantly running Python project that is subscribed to the topi
 
 ## MySql
 
-Stores the measurements from the microcontroller on database "idsBench" on one table (If the number of benches expands, there is a possibility to expand the number of tables in the database). This table holds cols "Time", "Temp", "Capacity." Importantly, MySql data is tied to a docker volume and therefore the data will persist between containers.
+Stores the measurements from the microcontroller on database "idsBench" on one table (If the number of benches expands, there is a possibility to expand the number of tables in the database). This table holds cols "Time," "Temp," and "Capacity." Importantly, MySql data is tied to a docker volume; therefore, the data will persist between containers.
 
 ## Flask
 
-Lastly, the Flask app allows retival from the MySql database through REST API in JSON format. It will update it's data every XXXX seconds.
+Lastly, the Flask app allows retrieval from the MySql database through REST API in JSON format. It will update its data every 5 seconds.
