@@ -1,7 +1,5 @@
 import paho.mqtt.client as paho
 
-# broker_address= "idsbroker.eastus.cloudapp.azure.com"
-
 broker_address= "localhost"
 port = 1883
 user = "user"
