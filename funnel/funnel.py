@@ -27,5 +27,11 @@ mqtt_handler.connect()
 
 # Need to loop to keep the program running. Any messages from broker will be handled
 # in the MQTTHandler class.
-while True:
-    time.sleep(1)
+try:
+    while True:
+        time.sleep(1)
+except SystemExit:
+    print("Exiting...")
+    mqtt_handler.disconnect()
+    database.disconnect()
+    exit()
