@@ -46,3 +46,7 @@ class MQTTHandler:
             time.sleep(0.1)
             
         self.client.subscribe("idsbench1/measurement")
+    
+    def disconnect(self):
+        self.client.loop_stop()
+        self.client.disconnect()
