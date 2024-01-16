@@ -14,7 +14,7 @@ services:
 
   funnel:
     build: ./funnel
-    command: sh -c "sleep 60s ; python3 -u ./funnel.py"
+    command: sh -c "sleep 24s ; python3 -u ./funnel.py"
     depends_on:
       - broker
       - mysql
@@ -41,6 +41,8 @@ services:
       context: flask 
       target: builder
     stop_signal: SIGINT
+    depends_on:
+      - mySql
     ports:
       - '8000:8000'
     restart: always
