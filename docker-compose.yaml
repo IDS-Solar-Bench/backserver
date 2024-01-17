@@ -42,7 +42,7 @@ services:
       target: builder
     stop_signal: SIGINT
     depends_on:
-      - mySql
+      - mysql
     ports:
       - '8000:8000'
     restart: always
