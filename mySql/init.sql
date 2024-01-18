@@ -1,11 +1,12 @@
 CREATE DATABASE IF NOT EXISTS idsBench;
-
 USE idsBench;
 
-CREATE TABLE IF NOT EXISTS brokerMessage (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    time TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    message TEXT NOT NULL
+CREATE TABLE IF NOT EXISTS brokerMessage(
+    id INT AUTO_INCREMENT PRIMARY KEY, 
+    time TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    temperature DECIMAL(3,1),
+    capacity INT,
+    message VARCHAR(50)
 );
 
 INSERT INTO brokerMessage (time, message) VALUES
