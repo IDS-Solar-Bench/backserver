@@ -18,9 +18,10 @@ class mySqlConnector:
     # TODO: The message we need from the broker is actually two different values temp and capcity.
     #       Need to decide how to break this data up. Whether this is in one message like "temp,capcity"
     #       or we send through different topics like "idsbench1/temp" and "idsbench1/capcity
-    def addMessage(self, message):
+    def addMessage(self, temp, capacity, message):
+
         cursor = self.connection.cursor()
-        insert_query = "INSERT INTO brokerMessage (time, message) VALUES (CURRENT_TIMESTAMP, %s)"
-        cursor.execute(insert_query, (message,))
+        insert_query = "INSERT INTO brokerMessage (temperature, capacity, message) VALUES (%s, %s, %s)"
+        cursor.execute(insert_query, (temp, capacity, message))
         self.connection.commit()
         cursor.close()

@@ -13,26 +13,33 @@ datafromSql = []
 def update():
 
 	# Connect to the MySQL database
-	# For some reason, to get uopdated info, mysql ref must be updated every
-	database = mysql.connector.connect(
-		user="root",
-		password="secret",
-		host="mysql",
-		port="3306",
-		database="idsBench"
-	)
+	# For some reason, to get updated info, mysql ref must be updated every time
+	database = None
+
+	try:
+		database = mysql.connector.connect(
+			user="root",
+			password="secret",
+			host="mysql",
+			port="3306",
+			database="idsBench"
+		)
+	# If the connection fails, try again
+	except (mysql.connector.errors.InterfaceError):
+		print("MySQL connection error. Trying again.")
+		return
 
 	cursor = database.cursor()
 
 	# Execute the SELECT query to retrieve data from the table
-	query = "SELECT time, message FROM brokerMessage;"
+	query = "SELECT time, temperature, capacity, message FROM brokerMessage;"
 	cursor.execute(query)
 
 	# Fetch all rows from the result set
 	rows = cursor.fetchall()
 
 	# Prepare the data to be returned
-	messages = [{'time': str(row[0]), 'message': row[1]} for row in rows]
+	messages = [{'time': str(row[0]), 'temp' : float(row[1]), 'capacity' : int(row[2]), 'message': row[1]} for row in rows]
 
 	cursor.close()
 

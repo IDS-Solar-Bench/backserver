@@ -32,8 +32,13 @@ class MQTTHandler:
     # This function will run every time we receive a message from the broker.
     # TODO: Message are being read as "b'message'". Need to fix this. https://stackoverflow.com/questions/6269765/what-does-the-b-character-do-in-front-of-a-string-literal
     def on_message(self, client, userdata, message):
-        print("Message received: " + str(message.payload))
-        self.database.addMessage(str(message.payload))
+
+        message_decode = str(message.payload.decode("utf-8"))
+        message_split = message_decode.split(",")
+
+        print("Message received: Temperature: " + message_split[0] + " Capacity: " + message_split[1] + " Message: " + message_split[2])        
+
+        self.database.addMessage(message_split[0], message_split[1], message_split[2])
 
     # This function will keeping looping until we are connected to the broker.
     # Once we are connected, we will subscribe to the topic "idsbench1/measurement".
