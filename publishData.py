@@ -1,4 +1,5 @@
 import paho.mqtt.client as paho
+import random 
 
 broker_address= "localhost"
 port = 1883
@@ -14,4 +15,10 @@ client1.username_pw_set(user, password=password)    #set username and password
 client1.on_publish = on_publish                          #assign function to callback
 client1.connect(broker_address, port)                           #establish connection
 
-ret= client1.publish("idsbench1/measurement","Hello, World!")
+temp = round(random.uniform(0,100), 1)
+capacity = int(random.uniform(0,100))
+message = "Hello, World!"
+
+payload = str(temp) + "," + str(capacity) + "," + message
+
+ret= client1.publish("idsbench1/measurement", payload)
