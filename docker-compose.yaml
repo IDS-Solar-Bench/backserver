@@ -31,6 +31,7 @@ services:
       - 3306:3306
     volumes:
       - mysql-data:/var/lib/mysql
+      - ./mySql/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=idsBench
