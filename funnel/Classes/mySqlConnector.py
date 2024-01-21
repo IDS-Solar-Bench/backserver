@@ -13,22 +13,6 @@ class mySqlConnector:
             database=database
         )
 
-        # We do not know if this is the first time we are connecting to the database.
-        # In the case that we are, we must pass these SQL commands to create the database and table.
-        # In the case that we are not, these commands will not do anything.
-        # TODO: Need to create a table with temp and capacity columns.
-        sql_commands = [
-            "CREATE DATABASE IF NOT EXISTS idsBench;",
-            "USE idsBench;",
-            "CREATE TABLE IF NOT EXISTS brokerMessage (id INT AUTO_INCREMENT PRIMARY KEY, time TIMESTAMP DEFAULT CURRENT_TIMESTAMP, message TEXT NOT NULL);"
-        ]
-
-        for command in sql_commands:
-            cursor = self.connection.cursor()
-            cursor.execute(command)
-            self.connection.commit()
-            cursor.close()
-
     
     # Adding a message from broker into database.
     # TODO: The message we need from the broker is actually two different values temp and capcity.
