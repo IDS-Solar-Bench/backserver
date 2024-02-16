@@ -39,7 +39,7 @@ def update():
 	rows = cursor.fetchall()
 
 	# Prepare the data to be returned
-	messages = [{'time': str(row[0]), 'temp' : float(row[1]), 'capacity' : int(row[2]), 'message': row[1]} for row in rows]
+	messages = [{'time': str(row[0]), 'temp' : float(row[1]), 'capacity' : int(row[2]), 'message': row[3]} for row in rows]
 
 	cursor.close()
 

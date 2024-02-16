@@ -29,8 +29,6 @@ class MQTTHandler:
         else:
             print("Connection failed")
 
-    # This function will run every time we receive a message from the broker.
-    # TODO: Message are being read as "b'message'". Need to fix this. https://stackoverflow.com/questions/6269765/what-does-the-b-character-do-in-front-of-a-string-literal
     def on_message(self, client, userdata, message):
 
         message_decode = str(message.payload.decode("utf-8"))
