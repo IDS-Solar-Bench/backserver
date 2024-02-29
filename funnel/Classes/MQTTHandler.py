@@ -16,7 +16,7 @@ class MQTTHandler:
         self.user = user
         self.password = password
 
-        self.client = mqttClient.Client("Python")
+        self.client = mqttClient.Client(mqttClient.CallbackAPIVersion.VERSION1)
         self.client.username_pw_set(user, password=password)
 
         self.client.on_connect = self.on_connect
